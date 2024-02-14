@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- displays site properly based on user's device -->
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <!-- css -->
+    <link rel="stylesheet" href="main.css" />
+    <title>Interactive card details form</title>
+
+    <!-- tailwind css -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <!-- <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style> -->
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="page lg:flex gap-32 items-center">
+      <div class="card_bg h-2/5 relative text-white lg:w-2/5">
+        <img
+          src="./images/bg-main-mobile.png"
+          alt=""
+          class="lg:hidden w-full"
+        />
+        <img
+          src="./images/bg-main-desktop.png"
+          alt=""
+          class="hidden lg:block h-screen"
+        />
+        <div class="card_back absolute top-9 right-7 lg:top-[45%] lg:-right-0">
+          <img
+            src="./images/bg-card-back.png"
+            alt=""
+            class="w-72 relative lg:w-80"
+          />
+          <p
+            class="absolute top-[40%] right-8 text-right text-lg font-bold tracking-wider"
+            id="CVS"
+          >
+            000
+          </p>
+        </div>
+        <div
+          class="card_front absolute top-1/2 left-7 lg:top-[15%] lg:left-[20%]"
+        >
+          <img
+            src="./images/bg-card-front.png"
+            alt=""
+            class="w-72 relative lg:w-80"
+          />
+          <div
+            class="absolute top-0 w-full h-full flex flex-col justify-between"
+          >
+            <div class="small_img flex items-center">
+              <span
+                class="inline-block circle w-6 h-6 rounded-full bg-white m-5 mr-0"
+              ></span>
+              <span
+                class="inline-block circle w-4 h-4 rounded-full border-solid border-2 border-white m-3"
+              ></span>
+            </div>
+            <div class="card_info m-5">
+              <p class="text-xl font-bold lg:tracking-widest" id="card_num">
+                0000 0000 0000 0000
+              </p>
+              <div class="flex items-center justify-between">
+                <p id="card_name">Omar Khaled</p>
+                <p><span id="MM">00 </span>/ <span id="YY">00</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content h-3/5 mt-20 w-4/5 m-auto lg:w-auto" id="content_page">
+        <form>
+          <p>Cardholder Name</p>
+          <input
+            type="text"
+            placeholder="e.g. Omar Khaled"
+            class="w-full"
+            required
+            maxlength="20"
+            id="input_card_name"
+          />
+          <p>Card Number</p>
+          <input
+            type="text"
+            placeholder="e.g. 1234 5678 9123 0000"
+            class="w-full"
+            required
+            id="input_card_num"
+            maxlength="16"
+          />
+          <div>
+            <div>
+              <p>Exp. Date (MM/YY)</p>
+              <div>
+                <input
+                  type="text"
+                  placeholder="MM"
+                  required
+                  maxlength="2"
+                  id="input_MM"
+                  onkeyup="expire_date('MM')"
+                />
+                <input
+                  type="text"
+                  placeholder="YY"
+                  required
+                  maxlength="2"
+                  id="input_YY"
+                  onkeyup="expire_date('YY')"
+                />
+              </div>
+            </div>
+            <div>
+              <p>CVS</p>
+              <input
+                type="text"
+                placeholder="e.g. 123"
+                class="w-full"
+                required
+                maxlength="3"
+                id="input_CVS"
+              />
+            </div>
+          </div>
+          <button id="confirm_btn">Confirm</button>
+        </form>
+      </div>
+      <div
+        class="thank_u content h-3/5 w-4/5 m-auto mt-24 lg:w-auto lg:mt-44 hidden"
+        id="thank_u_page"
+      >
+        <svg
+          width="80"
+          height="80"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="40" cy="40" r="40" fill="url(#a)" />
+          <path d="M28 39.92 36.08 48l16-16" stroke="#fff" stroke-width="3" />
+          <defs>
+            <linearGradient
+              id="a"
+              x1="-23.014"
+              y1="11.507"
+              x2="0"
+              y2="91.507"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="#6348FE" />
+              <stop offset="1" stop-color="#610595" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <h1>Thank you!</h1>
+        <p>We've added your card details</p>
+        <button id="edit_btn">edit</button>
+        <button id="Continue_btn">Continue</button>
+      </div>
+    </div>
+    <!-- Completed state start -->
+
+    <!-- Thank you! We've added your card details Continue
+
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Your Name Here</a>.
+    </div> -->
+    <script src="main.js"></script>
+  </body>
+</html>
